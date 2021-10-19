@@ -24,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         countButton.setOnClickListener(){
             countUp()
         }
+
+        val resetButton:Button = findViewById(R.id.reset_button)
+        resetButton.setOnClickListener(){
+            reset()
+        }
     }
 
     private fun rollDice(){
@@ -34,18 +39,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun countUp(){
-        try {
+
             var result:Int
             val resultText:TextView = findViewById(R.id.result_text)
             val text = resultText.text.toString()
+
             when(text) {
                 "1", "2", "3", "4","5" -> result = Integer.parseInt(text) + 1
                 "6" -> result = Integer.parseInt(text)
                 else -> result = 1
             }
+
             resultText.text = result.toString()
-        }catch (e:Exception){
-            Toast.makeText(this, "error in counting", Toast.LENGTH_SHORT).show()
-        }
+    }
+
+    private fun reset(){
+        val resultText:TextView = findViewById(R.id.result_text)
+        resultText.text = "0"
     }
 }
