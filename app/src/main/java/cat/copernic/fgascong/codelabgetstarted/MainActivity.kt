@@ -1,23 +1,24 @@
 package cat.copernic.fgascong.codelabgetstarted
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
-import java.lang.Exception
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
+    lateinit var diceImage:ImageView
+    lateinit var diceImage2:ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        diceImage = findViewById(R.id.dice_image)
+        diceImage2 = findViewById(R.id.dice_image2)
+
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener() {
-            rollDice()
+            rollDices()
         }
 
         val countButton:Button = findViewById(R.id.count_button)
@@ -31,30 +32,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun rollDice(){
-        //Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
-        val resultText:TextView = findViewById(R.id.result_text)
-        val randomInt = (1..6).random()
-        resultText.text = randomInt.toString()
+    private fun getRandomDiceImage():Int{
+        val drawableResource = when ((1..6).random()) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        return drawableResource
+    }
+    private fun rollDices(){
+        diceImage.setImageResource(getRandomDiceImage())
+        diceImage2.setImageResource(getRandomDiceImage())
     }
 
     private fun countUp(){
-
-            var result:Int
-            val resultText:TextView = findViewById(R.id.result_text)
-            val text = resultText.text.toString()
-
-            when(text) {
-                "1", "2", "3", "4","5" -> result = Integer.parseInt(text) + 1
-                "6" -> result = Integer.parseInt(text)
-                else -> result = 1
-            }
-
-            resultText.text = result.toString()
     }
 
     private fun reset(){
-        val resultText:TextView = findViewById(R.id.result_text)
-        resultText.text = "0"
+        diceImage.setImageResource(R.drawable.empty_dice)
+        diceImage2.setImageResource(R.drawable.empty_dice)
     }
 }
