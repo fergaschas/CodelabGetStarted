@@ -6,8 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
-    lateinit var diceImage:ImageView
-    lateinit var diceImage2:ImageView
+    private lateinit var diceImage:ImageView
+    private lateinit var diceImage2:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,17 +17,17 @@ class MainActivity : AppCompatActivity() {
         diceImage2 = findViewById(R.id.dice_image2)
 
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener() {
+        rollButton.setOnClickListener {
             rollDices()
         }
 
-        val countButton:Button = findViewById(R.id.count_button)
-        countButton.setOnClickListener(){
+        val countButton: Button = findViewById(R.id.count_button)
+        countButton.setOnClickListener {
             countUp()
         }
 
         val resetButton:Button = findViewById(R.id.reset_button)
-        resetButton.setOnClickListener(){
+        resetButton.setOnClickListener{
             reset()
         }
     }
